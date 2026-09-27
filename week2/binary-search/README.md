@@ -6,25 +6,26 @@ Given a sorted array of integers `nums` and an integer `target`, return the inde
 
 ## 2. Approach
 
-I solved this problem using Linear Search.
+I solved this problem using Binary Search to achieve O(log n) time complexity:
 
-1. Iterate through the array using a `for` loop.
-2. Compare each element with the `target`.
-3. If a match is found, return its index.
-4. If the loop completes without finding `target`, return `-1`.
+1. Initialize two pointers: `left = 0` and `right = nums.length - 1`.
+2. While `left <= right`, find the middle element `mid`.
+3. If `nums[mid] == target`, return `mid`.
+4. If `nums[mid] < target`, search the right half by setting `left = mid + 1`.
+5. If `nums[mid] > target`, search the left half by setting `right = mid - 1`.
+6. Return `-1` if target is not found.
 
 ## 3. Time Complexity
 
-**Time Complexity:** O(n)
-In the worst case, the target is at the end or not present. The algorithm checks all n elements, so time complexity grows linearly with n.
+**Time Complexity:** O(log n)
+The search space is divided in half during each step, resulting in logarithmic time complexity.
 
 ## 4. Space Complexity
 
 **Space Complexity:** O(1)
-The algorithm uses a single variable `i`, which requires a constant amount of extra memory.
+The algorithm uses a constant amount of extra space for pointer variables.
 
 ## 5. Reflection / Improvement
 
-- **More efficient approach:** Binary Search.
-- **What to change:** Divide the search range in half each step by comparing `target` with the middle element.
-- **Improved complexity:** O(log n) time complexity.
+- Binary Search is optimal for searching in sorted arrays.
+- Be careful with integer overflow when calculating `mid`; using `left + (right - left) / 2` prevents overflow.
